@@ -1,0 +1,153 @@
+/* 
+$VER: Connect98 2.00 (03/06/98)
+N=Connect
+O=1
+S=0
+V=N
+#=22502
+
+Connect ger dig en snyggt inloggning.
+OBS! KRÄVER minst NIKOM 1.60 ßeta 3 
+*/
+
+parse arg nod pers argument .
+options results
+Signal on syntax
+ 
+/* ===================================== */
+/*          Konfigurationszon            */
+/* ===================================== */
+
+/* Här skriver du in namnet på din fiiiina BBS! */
+BBS = 'The ERICADE Network'
+
+/* Här skriver du BBS:ens startdatum. Detta avgör hur gammal den är :) 
+om du ändrar till daab='' används Sysops första inloggningsdag som värde */
+
+daab='19931011' /* daab = '<ååååmmdd>' */
+
+/* Ändra till 0 om du inte vill ha Ansifärger! */
+Cols=1 
+
+/* Här är olika statusnivåer. Om du vill kan du lägga till egna */
+stats=Userinfo(pers,r)
+if stats = 100 then ustat='[Tjena SysOp!]'
+if stats = 99 then ustat='[Tjena CoSysOp!]'
+if stats = 0 then ustat='[Ny här?]'
+if stats = 10 then ustat='[Användare]'
+if stats = 70 then ustat='[VIP:are]'
+if stats = 60 then ustat='[Funktionär]'
+if stats = 30 then ustat='[Gammal användare]'
+
+/* ===================================== */
+/* Härunder finns inget du behöver ändra */
+/* ===================================== */
+
+
+/* Lite definitioner, rör ej! */
+LF='0a0d'x
+DLF='0a0a0d'x
+
+/* Färger */
+Bold = '[1m'
+None = '[0m'
+sv = '[30m'
+vi = '[37m'
+Gu = '[33m'
+Bl = '[34m'
+Gr = '[32m'
+Li = '[35m'
+Ro = '[31m'
+
+/* Bakgrundsfärger */
+
+Sb = '[40m'
+Rb = '[41m'
+Gb = '[42m'
+gub = '[43m'
+bb = '[44m'
+lb = '[45m'
+cb = '[46m'
+vb = '[47m'
+
+if cols=0 then do
+/* Färger */
+Bold = '[1m'
+None = '[0m'
+sv = ''
+vi = ''
+Gu = ''
+Bl = ''
+Gr = ''
+Li = ''
+Ro = ''
+
+/* Bakgrundsfärger */
+
+Sb = ''
+Rb = ''
+Gb = ''
+gub = ''
+bb = ''
+lb = ''
+cb = ''
+vb = ''
+
+end
+
+namn=UserInfo(pers,n)
+sendstring bb||gu
+BBS=vi||bold||bbs
+sendstring left('Välkommen till' BBS '',85) 
+sendstring lf||none||vi||sb||'Du är '||gu||namn||vi' '
+/* if  Nodeinfo(nod,t)=1 then sendstring lf */
+
+if  Nodeinfo(nod,t)=2 then do 
+Conn=NodeInfo(nod,s)
+if conn=0 then conn="SSH"
+if conn=19200 then conn="Telnet"
+/* if conn=38400 then conn="lokal Linux" */
+sendstring 'Inloggad med '
+sendstring gu
+sendstring conn||vi
+sendstring '.' lf
+end
+
+sendstring 'Detta är din inloggning nummer 'gu||userinfo(pers,i)||vi 'i ordningen' lf 
+sendstring 'Först inloggad: 'gu||Userinfo(pers,b)||vi' Senast inloggad: 'gu||userinfo(pers,e)||vi' ' lf
+
+/* Här kommer den fantastiska rutinen som kollar hurlänge du varit här! */
+
+dabb=(LEFT(userinfo(pers,b),8))
+dabe=date(s)
+#dabb=insert("20",dabb,0,2,"o")
+bonk=DATE('c',dabe,'s')
+bonka=DATE('c',dabb,'s') 
+
+dum=((bonk-bonka))
+sendstring 'Ditt namn har vunnit ära på denna BBS i 'gu||dum||vi 'dagar' lf 
+
+/* Här kommer den fantastiska rutinen som kollar BBS:ens ålder! */
+
+if daab='' then do
+daab=(LEFT(userinfo(0,b),8))
+#daab=insert("19",daab,0,2,"o")
+end 
+
+bonka=DATE('c',daab,'s') 
+
+dumm=((bonk-bonka))
+sendstring 'Basen har funnits i 'gu||dumm||vi 'dagar (du har varit här '||gu||trunc((dum/dumm)*100,1)||vi||'% av den tiden)' lf 
+
+/* Generella stats */
+
+sendstring 'Status: 'gu||stats vi 
+sendstring ustat
+sendstring lf
+ sendstring bb||left('',76)||lf||sb||none
+exit
+
+syntax:
+sendstring '0a0d'x||errortext(rc)' på rad 'sigl||'0a0d'x
+sendstring "'"sourceline(sigl)"'"||lf
+sendstring "Meddela SysOp!"||'0a0d'x

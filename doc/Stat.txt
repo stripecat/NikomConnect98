@@ -1,0 +1,57 @@
+Manual till Stat 2.1 (98)
+-------------------------
+
+Förbehåll
+---------
+Du använder filen på egen risk! Sprid inte ändrade filer! (Jo, gör det! Men hänvisa till originalet!)
+
+Installation:
+-------------
+
+2021 har jag nu för första gången på 23 år (!) uppdaterat den. Så nu
+är den 100% Nikom > 1.61-kompatibel. Enjoy! Om den fortfarande 
+fungerar på Nikom anno datsumal är mer tveksamt. Men alla versioner
+efter 2015 ska vara ok. Detta är gratis mjukvara och buggarna är också 
+gratis!
+
+Supporteras (kanske!) på:
+https://github.com/stripecat/NikomConnect98
+
+Min epost: erik@zalitis.se
+
+Original-dokumentation finnes här (Ring inte telefonnumret, för katten!):
+
+=================================================================================
+
+Den 31/12-1994 DOG en gammal vän..... Connected 0.95
+Den har numera ingen betydelse då Nikom kan skriva ut baudraten
+själv.
+
+Stat är en liten pryl att ha i inloggen, eller i sysinfo eller
+som något kommando.. Det visar en information av typ:
+
+Välkommen till The ERICADE Network
+Du är Erik Zalitis #0
+Detta är din inloggning nummer 91 i ordningen
+Först inloggad: 980419 01:30 Senast inloggad: 980531 21:10
+Ditt namn har vunnit ära på denna BBS i 45 dagar
+Basen har funnits i 1696 dagar (du har varit här 2.6% av den tiden)
+Status: 100 [Tjena SysOp!]
+
+Installationen är enkel.. Packar du upp till Nikom: ligger allt rätt!
+
+Nu skall du ta en BRA editor (ej ed!!!!) och editera filen "extkom22502.nik".
+Det är rätt självförklarande, så du behöver bara fylla i och vara glad.
+Sen sätter du in raden niknrcommand=16502 någonstans där du vill ha den och
+vips är det klart!
+
+
+Versioner
+---------
+1.00 (21/01/1995) Första utgåva!
+2.00 (03/06/1998) Ny version med lite rensad och uppiffad kod. :)
+2.10 (10/05/2021) Nu för modern post-bbs Nikom. Joy!
+
+Nå mig?
+-------
+The ERICADE Network // 08 / 7268265 (Nikom)
